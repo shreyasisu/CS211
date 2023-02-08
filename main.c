@@ -194,7 +194,7 @@ int main(int argc, char *argv[])
     }
     //start of game code
     printf("Welcome to the game of TwentyFour.\n");
-    printf("Use each of the four numbers shown below exactly once,\ncombining them somehow with the basic mathematical operators (+,-,*,/)\nto yeild the value twenty-four.\n");
+    printf("Use each of the four numbers shown below exactly once,\ncombining them somehow with the basic mathematical operators (+,-,*,/)\nto yield the value twenty-four.\n");
     int randomint;
     char symbols[3];
     double answer;
@@ -202,7 +202,7 @@ int main(int argc, char *argv[])
     if(easymode){
         while(play_again != 'N'){
             randomint = rand()%10;
-            printf("\nThe numbers to use are: %d, %d, %d, %d\n",easyArray[randomint][0],easyArray[randomint][1],easyArray[randomint][2],easyArray[randomint][3]);
+            printf("\nThe numbers to use are: %d, %d, %d, %d.\n",easyArray[randomint][0],easyArray[randomint][1],easyArray[randomint][2],easyArray[randomint][3]);
             printf("Enter the three operators to be used, in order (+,-,*, or /): ");
             scanf("%s",symbols);
             answer = easyArray[randomint][0];
@@ -250,7 +250,7 @@ int main(int argc, char *argv[])
             for(int start = 0; start<4; start++){
                 new_array[start] = solutions[random][start];
             }
-            printf("\nThe numbers to use are: %d, %d, %d, %d\n", new_array[0], new_array[1], new_array[2], new_array[3]);
+            printf("\nThe numbers to use are: %d, %d, %d, %d.\n", new_array[0], new_array[1], new_array[2], new_array[3]);
             printf("Enter the three operators to be used, in order (+,-,*, or /): ");
             scanf("%s",symbols);
             answer = new_array[0];
