@@ -7,7 +7,7 @@ double add(double x, double y, int isPrint){
     double z;
     z = x + y;
     if(isPrint == 1){
-        printf("%.f + %.f = %.f\n", x, y, z);
+        printf("%.f + %.f = %.f.\n", x, y, z);
     }
     return z;
 }
@@ -15,7 +15,7 @@ double minus(double x, double y, int isPrint){
     double z;
     z = x - y;
     if(isPrint == 1){
-        printf("%.f - %.f = %.f\n", x, y, z);
+        printf("%.f - %.f = %.f.\n", x, y, z);
     }
     return z;
 }
@@ -23,7 +23,7 @@ double multiply(double x, double y, int isPrint){
     double z;
     z = x * y;
     if(isPrint == 1){
-        printf("%.f * %.f = %.f\n", x, y, z);
+        printf("%.f * %.f = %.f.\n", x, y, z);
     }
     return z;
 }
@@ -31,7 +31,7 @@ double divide(double x, double y, int isPrint){
     double z;
     z = x / y;
     if(isPrint == 1){
-        printf("%.f / %.f = %.f\n", x, y, z);
+        printf("%.f / %.f = %.f.\n", x, y, z);
     }
     return z;
 }
@@ -200,7 +200,7 @@ int main(int argc, char *argv[])
     if(easymode){
         while((play_again != 'N') && (play_again != 'n')){
             randomint = rand()%10;
-            printf("\nThe numbers to use are: %d, %d, %d, %d\n",easyArray[randomint][0],easyArray[randomint][1],easyArray[randomint][2],easyArray[randomint][3]);
+            printf("\nThe numbers to use are: %d, %d, %d, %d.\n",easyArray[randomint][0],easyArray[randomint][1],easyArray[randomint][2],easyArray[randomint][3]);
             printf("Enter the three operators to be used, in order (+,-,*, or /): ");
             scanf("%s",symbols);
             answer = easyArray[randomint][0];
@@ -248,7 +248,7 @@ int main(int argc, char *argv[])
             for(int start = 0; start<4; start++){
                 new_array[start] = solutions[random][start];
             }
-            printf("The numbers to use are: %d, %d, %d, %d\n", new_array[0], new_array[1], new_array[2], new_array[3]);
+            printf("The numbers to use are: %d, %d, %d, %d.\n", new_array[0], new_array[1], new_array[2], new_array[3]);
             printf("Enter the three operators to be used, in order (+,-,*, or /): ");
             scanf("%s",symbols);
             answer = new_array[0];
