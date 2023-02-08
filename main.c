@@ -192,7 +192,7 @@ int main(int argc, char *argv[])
     }
     //start of game code
     printf("Welcome to the game of TwentyFour.\n");
-    printf("Use each of the four numbers shown below exactly once,\ncombining them somehow with the basic mathematical operators (+,-,*,/)\nto yeild the value twenty-four.\n");
+    printf("Use each of the four numbers shown below exactly once,\ncombining them somehow with the basic mathematical operators (+,-,*,/)\nto yield the value twenty-four.\n");
     int randomint = 0;
     char symbols[3];
     double answer = 0;
