@@ -242,7 +242,7 @@ int main(int argc, char *argv[])
     else{
         int new_array[4];
         int random = rand()%3189;
-        while((play_again != 'N') && (play_again != 'n')){
+        while(play_again != 'N'){
             random = rand()%3189;
             //printf("Random is: %d", random);
             for(int start = 0; start<4; start++){
