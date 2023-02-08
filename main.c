@@ -48,6 +48,7 @@ bool check(char x[]){
             else{
                 isGood = false;
                 printf("Error! Invalid operator entered. Please try again.\n");
+                break;
             }
         }
     }
