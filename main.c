@@ -31,10 +31,8 @@ double multiply(double x, double y, int isPrint){
 }
 double divide(double x, double y, int isPrint){
     double z;
-    double temp;
-    z = x / y;
+    z = (int)x / (int)y;
 
-    //z = (int)z;
     if(isPrint == 1){
         printf("%.f / %.f = %.f.\n", x, y, z);
     }
@@ -246,7 +244,7 @@ int main(int argc, char *argv[])
     }
     else{
         int new_array[4];
-        int random = rand()%3189;
+        int random;
         while(play_again != 'N'){
             random = rand()%3189;
             //printf("Random is: %d", random);
