@@ -198,7 +198,7 @@ int main(int argc, char *argv[])
     double answer = 0;
     bool isGood;
     if(easymode){
-        while((play_again != 'N') && (play_again != 'n')){
+        while(play_again != 'N'){
             randomint = rand()%10;
             printf("\nThe numbers to use are: %d, %d, %d, %d.\n",easyArray[randomint][0],easyArray[randomint][1],easyArray[randomint][2],easyArray[randomint][3]);
             printf("Enter the three operators to be used, in order (+,-,*, or /): ");
