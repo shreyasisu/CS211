@@ -31,10 +31,10 @@ double multiply(double x, double y, int isPrint){
 }
 double divide(double x, double y, int isPrint){
     double z;
-    z = (int)x / (int)y;
+    z = x / y;
 
     if(isPrint == 1){
-        printf("%.f / %.f = %.f.\n", x, y, z);
+        printf("%.f / %.f = %.f.\n", x, y, (int)z);
     }
     return z;
 }
