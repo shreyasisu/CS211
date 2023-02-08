@@ -3,6 +3,8 @@
 #include <stdbool.h> //to include true in bool statements
 #include <ctype.h> // to include toupper()
 #include <string.h>
+#include <math.h>
+
 double add(double x, double y, int isPrint){
     double z;
     z = x + y;
@@ -30,6 +32,7 @@ double multiply(double x, double y, int isPrint){
 double divide(double x, double y, int isPrint){
     double z;
     z = x / y;
+    z = floor(z);
     if(isPrint == 1){
         printf("%.f / %.f = %.f.\n", x, y, z);
     }
