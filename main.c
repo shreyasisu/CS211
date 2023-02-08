@@ -34,7 +34,7 @@ double divide(double x, double y, int isPrint){
     z = x / y;
 
     if(isPrint == 1){
-        printf("%.f / %.f = %.f.\n", x, y, (int)z);
+        printf("%.f / %.f = %.f.\n", x, y, round(z-.5));
     }
     return z;
 }
