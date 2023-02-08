@@ -4,7 +4,6 @@
 #include <ctype.h> // to include toupper()
 #include <string.h>
 #include <math.h>
-
 double add(double x, double y, int isPrint){
     double z;
     z = x + y;
@@ -31,10 +30,11 @@ double multiply(double x, double y, int isPrint){
 }
 double divide(double x, double y, int isPrint){
     double z;
+    int p;
     z = x / y;
-
+    p = (int)z;
     if(isPrint == 1){
-        printf("%.f / %.f = %.f.\n", x, y, round(z-.5));
+        printf("%.f / %.f = %d.\n", x, y, p);
     }
     return z;
 }
@@ -48,7 +48,6 @@ bool check(char x[]){
             else{
                 isGood = false;
                 printf("Error! Invalid operator entered. Please try again.\n");
-                break;
             }
         }
     }
@@ -195,15 +194,15 @@ int main(int argc, char *argv[])
     }
     //start of game code
     printf("Welcome to the game of TwentyFour.\n");
-    printf("Use each of the four numbers shown below exactly once,\ncombining them somehow with the basic mathematical operators (+,-,*,/)\nto yield the value twenty-four.\n");
-    int randomint = 0;
+    printf("Use each of the four numbers shown below exactly once,\ncombining them somehow with the basic mathematical operators (+,-,*,/)\nto yeild the value twenty-four.\n");
+    int randomint;
     char symbols[3];
-    double answer = 0;
+    double answer;
     bool isGood;
     if(easymode){
         while(play_again != 'N'){
             randomint = rand()%10;
-            printf("\nThe numbers to use are: %d, %d, %d, %d.\n",easyArray[randomint][0],easyArray[randomint][1],easyArray[randomint][2],easyArray[randomint][3]);
+            printf("\nThe numbers to use are: %d, %d, %d, %d\n",easyArray[randomint][0],easyArray[randomint][1],easyArray[randomint][2],easyArray[randomint][3]);
             printf("Enter the three operators to be used, in order (+,-,*, or /): ");
             scanf("%s",symbols);
             answer = easyArray[randomint][0];
@@ -251,7 +250,7 @@ int main(int argc, char *argv[])
             for(int start = 0; start<4; start++){
                 new_array[start] = solutions[random][start];
             }
-            printf("The numbers to use are: %d, %d, %d, %d.\n", new_array[0], new_array[1], new_array[2], new_array[3]);
+            printf("\nThe numbers to use are: %d, %d, %d, %d\n", new_array[0], new_array[1], new_array[2], new_array[3]);
             printf("Enter the three operators to be used, in order (+,-,*, or /): ");
             scanf("%s",symbols);
             answer = new_array[0];
@@ -283,7 +282,7 @@ int main(int argc, char *argv[])
             else{
                 printf("Sorry. Your solution did not evaluate to 24.\n");
             }
-            printf("Would you like to play again? Enter N for no and any other character for yes. ");
+            printf("\nWould you like to play again? Enter N for no and any other character for yes. ");
             fgetc(stdin);
             scanf("%c", &play_again);
 
