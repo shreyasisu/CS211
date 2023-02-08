@@ -4,37 +4,35 @@
 #include <ctype.h> // to include toupper()
 #include <string.h>
 #include <math.h>
-double add(double x, double y, int isPrint){
-    double z;
+int add(int x, int y, int isPrint){
+    int z;
     z = x + y;
     if(isPrint == 1){
-        printf("%.f + %.f = %.f.\n", x, y, z);
+        printf("%d + %d = %d.\n", x, y, z);
     }
     return z;
 }
-double minus(double x, double y, int isPrint){
-    double z;
+int minus(int x, int y, int isPrint){
+    int z;
     z = x - y;
     if(isPrint == 1){
-        printf("%.f - %.f = %.f.\n", x, y, z);
+        printf("%d - %d = %d.\n", x, y, z);
     }
     return z;
 }
-double multiply(double x, double y, int isPrint){
-    double z;
+int multiply(int x, int y, int isPrint){
+    int z;
     z = x * y;
     if(isPrint == 1){
-        printf("%.f * %.f = %.f.\n", x, y, z);
+        printf("%d * %d = %d.\n", x, y, z);
     }
     return z;
 }
-double divide(double x, double y, int isPrint){
-    double z;
-    int p;
-    z = x / y;
-    p = (int)z;
+int divide(int x, int y, int isPrint){
+    int z;
+    z = (int)(x / y);
     if(isPrint == 1){
-        printf("%.f / %.f = %d.\n", x, y, p);
+        printf("%d / %d = %d.\n", x, y, z);
     }
     return z;
 }
@@ -78,7 +76,7 @@ char debug_solutions[3188][3];
 int ctr=0;
 
 void solve(){
-    double answer;
+    int answer;
     int new_array[4];
 
     for(int i = 1; i<10; i++){
@@ -94,18 +92,18 @@ void solve(){
                         answer = new_array[0];
                         for(int j = 0; j <3; j++){
                             if(combo_array[k][j] == '+'){
-                                answer = add(answer, (double)new_array[j+1],0);
+                                answer = add(answer, new_array[j+1],0);
                             }
                             else{
                                 if(combo_array[k][j] == '-'){
-                                    answer = minus(answer, (double)new_array[j+1],0);
+                                    answer = minus(answer, new_array[j+1],0);
                                 }
                                 else{
                                     if(combo_array[k][j] == '*'){
-                                        answer = multiply(answer, (double)new_array[j+1],0);
+                                        answer = multiply(answer, new_array[j+1],0);
                                     }
                                     else{
-                                        answer = divide(answer, (double)new_array[j+1],0);
+                                        answer = divide(answer, new_array[j+1],0);
                                     }
                                 }
                             }
@@ -198,12 +196,12 @@ int main(int argc, char *argv[])
     //start of game code
     int randomint;
     char symbols[3];
-    double answer;
+    int answer;
     bool isGood;
     if(easymode){
         while(play_again != 'N'){
             randomint = rand()%10;
-            printf("The numbers to use are: %d, %d, %d, %d.\n",easyArray[randomint][0],easyArray[randomint][1],easyArray[randomint][2],easyArray[randomint][3]);
+            printf("\nThe numbers to use are: %d, %d, %d, %d.\n",easyArray[randomint][0],easyArray[randomint][1],easyArray[randomint][2],easyArray[randomint][3]);
             printf("Enter the three operators to be used, in order (+,-,*, or /): ");
             scanf("%s",symbols);
             answer = easyArray[randomint][0];
@@ -213,23 +211,23 @@ int main(int argc, char *argv[])
             }
             for(int j = 0; j <3; j++){
                 if(symbols[j] == '+'){
-                    answer = add(answer, (double)easyArray[randomint][j+1],1);
+                    answer = add(answer, easyArray[randomint][j+1],1);
                 }
                 else{
                     if(symbols[j] == '-'){
-                        answer = minus(answer, (double)easyArray[randomint][j+1],1);
+                        answer = minus(answer, easyArray[randomint][j+1],1);
                     }
                     else{
                         if(symbols[j] == '*'){
-                            answer = multiply(answer, (double)easyArray[randomint][j+1],1);
+                            answer = multiply(answer, easyArray[randomint][j+1],1);
                         }
                         else{
-                            answer = divide(answer, (double)easyArray[randomint][j+1],1);
+                            answer = divide(answer, easyArray[randomint][j+1],1);
                         }
                     }
                 }
             }
-            if(answer == (double)24){
+            if((answer - 24.0) < 0.001 && ((answer - 24.0) >= 0)){
                 printf("Well done! You are a math genius.\n");
             }
             else{
@@ -251,7 +249,7 @@ int main(int argc, char *argv[])
             for(int start = 0; start<4; start++){
                 new_array[start] = solutions[random][start];
             }
-            printf("The numbers to use are: %d, %d, %d, %d.\n", new_array[0], new_array[1], new_array[2], new_array[3]);
+            printf("\nThe numbers to use are: %d, %d, %d, %d.\n", new_array[0], new_array[1], new_array[2], new_array[3]);
             printf("Enter the three operators to be used, in order (+,-,*, or /): ");
             scanf("%s",symbols);
             answer = new_array[0];
@@ -261,23 +259,23 @@ int main(int argc, char *argv[])
             }
             for(int j = 0; j <3; j++){
                 if(symbols[j] == '+'){
-                    answer = add(answer, (double)new_array[j+1],1);
+                    answer = add(answer, new_array[j+1],1);
                 }
                 else{
                     if(symbols[j] == '-'){
-                        answer = minus(answer, (double)new_array[j+1],1);
+                        answer = minus(answer, new_array[j+1],1);
                     }
                     else{
                         if(symbols[j] == '*'){
-                            answer = multiply(answer, (double)new_array[j+1],1);
+                            answer = multiply(answer, new_array[j+1],1);
                         }
                         else{
-                            answer = divide(answer, (double)new_array[j+1],1);
+                            answer = divide(answer, new_array[j+1],1);
                         }
                     }
                 }
             }
-            if(answer == (double)24){
+            if((answer - 24.0) < 0.001 && ((answer - 24.0) >= 0)){
                 printf("Well done! You are a math genius.\n");
             }
             else{
