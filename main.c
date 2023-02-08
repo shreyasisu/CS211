@@ -45,6 +45,7 @@ bool check(char x[]){
             else{
                 isGood = false;
                 printf("Error! Invalid operator entered. Please try again.\n");
+                break;
             }
         }
     }
@@ -199,7 +200,7 @@ int main(int argc, char *argv[])
     if(easymode){
         while((play_again != 'N') && (play_again != 'n')){
             randomint = rand()%10;
-            printf("The numbers to use are: %d, %d, %d, %d\n",easyArray[randomint][0],easyArray[randomint][1],easyArray[randomint][2],easyArray[randomint][3]);
+            printf("\nThe numbers to use are: %d, %d, %d, %d\n",easyArray[randomint][0],easyArray[randomint][1],easyArray[randomint][2],easyArray[randomint][3]);
             printf("Enter the three operators to be used, in order (+,-,*, or /): ");
             scanf("%s",symbols);
             answer = easyArray[randomint][0];
@@ -231,11 +232,12 @@ int main(int argc, char *argv[])
             else{
                 printf("Sorry. Your solution did not evaluate to 24.\n");
             }
-            printf("Would you like to play again? Enter N for no and any other character for yes. ");
+            printf("\nWould you like to play again? Enter N for no and any other character for yes. ");
             fgetc(stdin);
             scanf("%c", &play_again);
 
         }
+        printf("Thanks for playing!\n");
     }
     else{
         int new_array[4];
@@ -284,7 +286,5 @@ int main(int argc, char *argv[])
 
         }
     }
-    printf("Easymode is set to: %d\n", easymode);
-    printf("Debugger is set to: %d\n", debugger);
     return 0;
 }
