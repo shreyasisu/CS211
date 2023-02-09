@@ -42,12 +42,15 @@ void multiply(double *x, double y, int isPrint){
 void divide(double *x, double y, int isPrint){
     double temp;
     temp = *x;
-    if(*x == 12 && y == 8){
-        *x = 1;
+    *x = *x / y;
+    if(isPrint == 1){
+        printf("%.f / %.f = %.f.\n", temp, y, *x);
     }
-    else{
-        *x = *x / y;
-    }
+}
+void divide_easy(double *x, double y, int isPrint){
+    double temp;
+    temp = *x;
+    *x = (double)((int)(*x / y));
     if(isPrint == 1){
         printf("%.f / %.f = %.f.\n", temp, y, *x);
     }
@@ -75,8 +78,8 @@ bool check(char x[]){
 }
 char operators[] = {'+', '-', '*', '/'};
 
-int solutions[3307][4];
-char debug_solutions[3307][3];
+int solutions[3188][4];
+char debug_solutions[3188][3];
 //this value will find all possible solutions for the game 24 and store it in two lists, one for the numbers, one for the operators
 void solve(){
     double answer = 0.0;
@@ -258,7 +261,7 @@ int main(int argc, char *argv[]) {
                 multiply(&answer, num2, 1);
             }
             else if (symbols[0] == '/'){
-                divide(&answer, num2, 1);
+                divide_easy(&answer, num2, 1);
             }
             //second symbol
             if(symbols[1] == '+'){
@@ -271,7 +274,7 @@ int main(int argc, char *argv[]) {
                 multiply(&answer, num3, 1);
             }
             else if (symbols[1] == '/'){
-                divide(&answer, num3, 1);
+                divide_easy(&answer, num3, 1);
             }
             //third symbol
             if(symbols[2] == '+'){
@@ -284,7 +287,7 @@ int main(int argc, char *argv[]) {
                 multiply(&answer, num4, 1);
             }
             else if (symbols[2] == '/'){
-                divide(&answer, num4, 1);
+                divide_easy(&answer, num4, 1);
             }
             //check if answer is correct
             if((answer - 24.0) < 0.001 && ((answer - 24.0) >= 0)){
@@ -328,7 +331,7 @@ int main(int argc, char *argv[]) {
                 multiply(&answer, num2, 1);
             }
             else if (symbols[0] == '/'){
-                divide(&answer, num2, 1);
+                divide_easy(&answer, num2, 1);
             }
             //second symbol
             if(symbols[1] == '+'){
@@ -341,7 +344,7 @@ int main(int argc, char *argv[]) {
                 multiply(&answer, num3, 1);
             }
             else if (symbols[1] == '/'){
-                divide(&answer, num3, 1);
+                divide_easy(&answer, num3, 1);
             }
             //third symbol
             if(symbols[2] == '+'){
@@ -354,7 +357,7 @@ int main(int argc, char *argv[]) {
                 multiply(&answer, num4, 1);
             }
             else if (symbols[2] == '/'){
-                divide(&answer, num4, 1);
+                divide_easy(&answer, num4, 1);
             }
             //check answer
             if((answer - 24.0) < 0.001 && ((answer - 24.0) >= 0.0)){
