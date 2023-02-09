@@ -47,6 +47,7 @@ void divide(double *x, double y, int isPrint){
         printf("%.f / %.f = %.f.\n", temp, y, *x);
     }
 }
+//This is for division during user input(not debug mode)
 void divide_easy(double *x, double y, int isPrint){
     double temp;
     temp = *x;
@@ -55,9 +56,24 @@ void divide_easy(double *x, double y, int isPrint){
         printf("%.f / %.f = %.f.\n", temp, y, *x);
     }
 }
+
+double symbol_loop(const char *symbols, double *answer, double num2) {
+    for(int op = 0; op < 3; op++) {
+        if (symbols[op] == '+') {
+            add(answer, num2, 1);
+        } else if (symbols[op] == '-') {
+            minus(answer, num2, 1);
+        } else if (symbols[op] == '*') {
+            multiply(answer, num2, 1);
+        } else if (symbols[op] == '/') {
+            divide_easy(answer, num2, 1);
+        }
+    }
+    return (*answer);
+}
 //this function checks if user input is valid to continue
 bool check(char x[]){
-    bool isGood;
+    bool isGood;//boolean for if the input is valid, then we can continue
     if(strlen(x)==3){
         for(int i = 0; i<3; i++){
             if(x[i] == '+' || x[i] == '-' || x[i] == '*' || x[i] == '/'){
@@ -80,6 +96,9 @@ char operators[] = {'+', '-', '*', '/'};
 
 int solutions[3188][4];
 char debug_solutions[3188][3];
+
+double symbol_loop(const char *symbols, double *answer, double num2);
+
 //this value will find all possible solutions for the game 24 and store it in two lists, one for the numbers, one for the operators
 void solve(){
     double answer = 0.0;
@@ -251,44 +270,7 @@ int main(int argc, char *argv[]) {
                 continue;
             }
             //first symbol
-            if(symbols[0] == '+'){
-                add(&answer, num2,1);
-            }
-            else if(symbols[0] == '-'){
-                minus(&answer, num2, 1);
-            }
-            else if( symbols[0] == '*'){
-                multiply(&answer, num2, 1);
-            }
-            else if (symbols[0] == '/'){
-                divide_easy(&answer, num2, 1);
-            }
-            //second symbol
-            if(symbols[1] == '+'){
-                add(&answer, num3,1);
-            }
-            else if(symbols[1] == '-'){
-                minus(&answer, num3, 1);
-            }
-            else if( symbols[1] == '*'){
-                multiply(&answer, num3, 1);
-            }
-            else if (symbols[1] == '/'){
-                divide_easy(&answer, num3, 1);
-            }
-            //third symbol
-            if(symbols[2] == '+'){
-                add(&answer, num4,1);
-            }
-            else if(symbols[2] == '-'){
-                minus(&answer, num4, 1);
-            }
-            else if( symbols[2] == '*'){
-                multiply(&answer, num4, 1);
-            }
-            else if (symbols[2] == '/'){
-                divide_easy(&answer, num4, 1);
-            }
+            answer = symbol_loop(symbols, &answer, num2);
             //check if answer is correct
             if((answer - 24.0) < 0.001 && ((answer - 24.0) >= 0)){
                 printf("Well done! You are a math genius.\n");
@@ -321,44 +303,8 @@ int main(int argc, char *argv[]) {
                 continue;
             }
             //first symbol
-            if(symbols[0] == '+'){
-                add(&answer, num2,1);
-            }
-            else if(symbols[0] == '-'){
-                minus(&answer, num2, 1);
-            }
-            else if( symbols[0] == '*'){
-                multiply(&answer, num2, 1);
-            }
-            else if (symbols[0] == '/'){
-                divide_easy(&answer, num2, 1);
-            }
-            //second symbol
-            if(symbols[1] == '+'){
-                add(&answer, num3,1);
-            }
-            else if(symbols[1] == '-'){
-                minus(&answer, num3, 1);
-            }
-            else if( symbols[1] == '*'){
-                multiply(&answer, num3, 1);
-            }
-            else if (symbols[1] == '/'){
-                divide_easy(&answer, num3, 1);
-            }
-            //third symbol
-            if(symbols[2] == '+'){
-                add(&answer, num4,1);
-            }
-            else if(symbols[2] == '-'){
-                minus(&answer, num4, 1);
-            }
-            else if( symbols[2] == '*'){
-                multiply(&answer, num4, 1);
-            }
-            else if (symbols[2] == '/'){
-                divide_easy(&answer, num4, 1);
-            }
+            answer = symbol_loop(symbols, &answer, num2);
+
             //check answer
             if((answer - 24.0) < 0.001 && ((answer - 24.0) >= 0.0)){
                 printf("Well done! You are a math genius.\n");
@@ -375,3 +321,4 @@ int main(int argc, char *argv[]) {
     }
     return 0;
 }
+
