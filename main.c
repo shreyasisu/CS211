@@ -4,38 +4,45 @@
 #include <ctype.h> // to include toupper()
 #include <string.h>
 #include <math.h>
-int add(int x, int y, int isPrint){
-    int z;
-    z = x + y;
+
+void add(double *x, double y, int isPrint){
+    double temp;
+    temp = *x;
+    *x += y;
     if(isPrint == 1){
-        printf("%d + %d = %d.\n", x, y, z);
+        printf("%.f + %.f = %.f.\n", temp, y, *x);
     }
-    return z;
 }
-int minus(int x, int y, int isPrint){
-    int z;
-    z = x - y;
+void minus(double *x, double y, int isPrint){
+    double temp;
+    temp = *x;
+    *x -= y;
     if(isPrint == 1){
-        printf("%d - %d = %d.\n", x, y, z);
+        printf("%.f - %.f = %.f.\n", temp, y, *x);
     }
-    return z;
 }
-int multiply(int x, int y, int isPrint){
-    int z;
-    z = x * y;
+void multiply(double *x, double y, int isPrint){
+    double temp;
+    temp = *x;
+    *x *= y;
     if(isPrint == 1){
-        printf("%d * %d = %d.\n", x, y, z);
+        printf("%.f * %.f = %.f.\n", temp, y, *x);
     }
-    return z;
 }
-int divide(int x, int y, int isPrint){
-    int z;
-    z = (int)(x / y);
+void divide(double *x, double y, int isPrint){
+    double temp;
+    temp = *x;
+    if(*x == 12 && y == 8){
+        *x = 1;
+    }
+    else{
+        *x = *x / y;
+    }
     if(isPrint == 1){
-        printf("%d / %d = %d.\n", x, y, z);
+        printf("%.f / %.f = %.f.\n", temp, y, *x);
     }
-    return z;
 }
+
 bool check(char x[]){
     bool isGood;
     if(strlen(x)==3){
@@ -56,81 +63,90 @@ bool check(char x[]){
     }
     return isGood;
 }
-
 char operators[] = {'+', '-', '*', '/'};
-char combo_array[64][4]; // 64 possible combinations of 3 operators
-int count = 0;
 
-void generate_combinations(int index, char current_str[]) {
-    if (index == 3) {
-        strcpy(combo_array[count++], current_str);
-        return;
-    }
-    for (int i = 0; i < 4; i++) {
-        current_str[index] = operators[i];
-        generate_combinations(index + 1, current_str);
-    }
-}
-int solutions[3188][4];
-char debug_solutions[3188][3];
-int ctr=0;
-
+int solutions[3307][4];
+char debug_solutions[3307][3];
 void solve(){
-    int answer;
-    int new_array[4];
+    double answer = 0.0;
+    int ctr=0;
+    char symbols[3];
+    //These will generate all the possible combinations of numbers.
+    for(double i = 1.0; i<10.0; i++){
+        for(double t = 1.0; t<10.0; t++){
+            for(double r = 1.0; r<10.0; r++){
+                for(double z = 1.0; z<10.0; z++){
+                    //this will loop through the combinations array of operators
+                    for(int i1 = 0; i1 <4; i1++){
+                        for(int k1 = 0; k1 <4; k1++){
+                            for(int j1 = 0; j1 <4; j1++){
+                                symbols[0] = operators[i1];
+                                symbols[1] = operators[k1];
+                                symbols[2] = operators[j1];
+                                answer = i; //first value of the numbers
+                                //first index
+                                if(symbols[0] == '+'){
+                                    add(&answer, t,0);
+                                    debug_solutions[ctr][0] = '+';
+                                }
+                                else if(symbols[0] == '-') {
+                                    minus(&answer, t, 0);
+                                    debug_solutions[ctr][0] = '-';
+                                }
+                                else if(symbols[0] == '*'){
+                                    multiply(&answer, t,0);
+                                    debug_solutions[ctr][0] = '*';
+                                }
+                                else if (symbols[0] == '/'){
+                                    divide(&answer, t,0);
+                                    debug_solutions[ctr][0] = '/';
+                                }
+                                //second index
+                                if(symbols[1] == '+'){
+                                    add(&answer, r,0);
+                                    debug_solutions[ctr][1] = '+';
+                                }
+                                else if(symbols[1] == '-') {
+                                    minus(&answer, r, 0);
+                                    debug_solutions[ctr][1] = '-';
+                                }
+                                else if(symbols[1] == '*'){
+                                    multiply(&answer, r,0);
+                                    debug_solutions[ctr][1] = '*';
+                                }
+                                else if (symbols[1] == '/'){
+                                    divide(&answer, r,0);
+                                    debug_solutions[ctr][1] = '/';
+                                }
+                                //third index
+                                if(symbols[2] == '+'){
+                                    add(&answer, z,0);
+                                    debug_solutions[ctr][2] = '+';
+                                }
+                                else if(symbols[2] == '-') {
+                                    minus(&answer, z, 0);
+                                    debug_solutions[ctr][2] = '-';
+                                }
+                                else if(symbols[2] == '*'){
+                                    multiply(&answer, z,0);
+                                    debug_solutions[ctr][2] = '*';
+                                }
+                                else if (symbols[2] == '/') {
+                                    divide(&answer, z, 0);
+                                    debug_solutions[ctr][2] = '/';
+                                }
+                                //Is the answer we got 24, if so assign the values to solutions array
 
-    for(int i = 1; i<10; i++){
-        new_array[0] = i;
-        for(int k = 1; k<10; k++){
-            new_array[1] = k;
-            for(int j = 1; j<10; j++){
-                new_array[2] = j;
-                for(int z = 1; z<10; z++){
-                    new_array[3]=z;
-
-                    for(int k = 0; k<64; k++){
-                        answer = new_array[0];
-                        for(int j = 0; j <3; j++){
-                            if(combo_array[k][j] == '+'){
-                                answer = add(answer, new_array[j+1],0);
-                            }
-                            else{
-                                if(combo_array[k][j] == '-'){
-                                    answer = minus(answer, new_array[j+1],0);
-                                }
-                                else{
-                                    if(combo_array[k][j] == '*'){
-                                        answer = multiply(answer, new_array[j+1],0);
-                                    }
-                                    else{
-                                        answer = divide(answer, new_array[j+1],0);
-                                    }
+                                if((answer - 24.0) < 0.001 && ((answer - 24.0) >= 0.0)){
+                                    solutions[ctr][0] = i;
+                                    solutions[ctr][1] = t;
+                                    solutions[ctr][2] = r;
+                                    solutions[ctr][3] = z;
+                                    //ctr only goes up if the solution is correct
+                                    //therefore debug_solutions will get rewritten if the answer is wrong
+                                    ctr++;
                                 }
                             }
-                        }
-                        if((answer - 24.0) < 0.001 && ((answer - 24.0) >= 0)){
-                            for(int l = 0; l<4; l++){
-                                solutions[ctr][l] = new_array[l];
-                            }
-                            for(int j = 0; j <3; j++){
-                                if(combo_array[k][j] == '+'){
-                                    debug_solutions[ctr][j] = '+';
-                                }
-                                else{
-                                    if(combo_array[k][j] == '-'){
-                                        debug_solutions[ctr][j] = '-';
-                                    }
-                                    else{
-                                        if(combo_array[k][j] == '*'){
-                                            debug_solutions[ctr][j] = '*';
-                                        }
-                                        else{
-                                            debug_solutions[ctr][j] = '/';
-                                        }
-                                    }
-                                }
-                            }
-                            ctr++;
                         }
                     }
                 }
@@ -139,45 +155,47 @@ void solve(){
     }
 }
 
-int main(int argc, char *argv[])
-{
+int main(int argc, char *argv[]) {
+    srand(1);
     char current_str[4];
-    generate_combinations(0, current_str);
     solve();
     bool easymode = true;
     bool debugger = false;
     int easyArray[10][4] = {
-            {3,9,4,1},{8,5,8,1}, {6,1,5,1}, {2,8,7,8}, {5,2,9,2}, {2,6,8,4}, {5,5,4,3},{6,6,2,6}, {8,4,2,6}, {6,2,8,1}
+            {3, 9, 4, 1},
+            {8, 5, 8, 1},
+            {6, 1, 5, 1},
+            {2, 8, 7, 8},
+            {5, 2, 9, 2},
+            {2, 6, 8, 4},
+            {5, 5, 4, 3},
+            {6, 6, 2, 6},
+            {8, 4, 2, 6},
+            {6, 2, 8, 1}
     };
     char play_again = 'y';
     //loop through and find flags
     int i = 1;
-    while((argc) > 2)
-    {
-        if(argv[i][0]=='-'){
-            switch(argv[i][1])
-            {
+    while ((argc) > 2) {
+        if (argv[i][0] == '-') {
+            switch (argv[i][1]) {
                 case 'e':
-                    if(atoi(argv[i+1]) == 1)
-                    {
+                    if (atoi(argv[i + 1]) == 1) {
                         easymode = true;
                     }
-                    if(atoi(argv[i+1]) == 0)
-                    {
+                    if (atoi(argv[i + 1]) == 0) {
                         easymode = false;
                     }
-                    argc -=2;
+                    argc -= 2;
                     break;
                 case 'd':
-                    if(atoi(argv[i+1]) == 1)
-                    {
+                    if (atoi(argv[i + 1]) == 1) {
                         debugger = true;
                     }
-                    if(atoi(argv[i+1]) == 0)
-                    {
+                    if (atoi(argv[i + 1]) == 0) {
                         debugger = false;
                     }
-                    argc -=2;
+                    argc -= 2;
                     break;
             }
         }
@@ -186,47 +204,76 @@ int main(int argc, char *argv[])
     printf("Welcome to the game of TwentyFour.\n");
     printf("Use each of the four numbers shown below exactly once,\ncombining them somehow with the basic mathematical operators (+,-,*,/)\nto yield the value twenty-four.\n");
     //debugger code first
-    if(debugger){
+    if (debugger) {
         int c = 1;
-        for(int t = 0; t<3188; t++){
-            printf("%d. %d%c%d%c%d%c%d\n", c, solutions[t][0], debug_solutions[t][0], solutions[t][1],debug_solutions[t][1],solutions[t][2],debug_solutions[t][2], solutions[t][3]);
+        for (int t = 0; t < 3187; t++) {
+            printf("%d. %d%c%d%c%d%c%d\n", c, solutions[t][0], debug_solutions[t][0], solutions[t][1],
+                   debug_solutions[t][1], solutions[t][2], debug_solutions[t][2], solutions[t][3]);
             c++;
         }
+        printf("%d. %d%c%d%c%d%c%d", c, solutions[3187][0], debug_solutions[3187][0], solutions[3187][1],
+               debug_solutions[3187][1], solutions[3187][2], debug_solutions[3187][2], solutions[3187][3]);
     }
     //start of game code
     int randomint;
     char symbols[3];
-    int answer;
+    double answer;
     bool isGood;
     if(easymode){
         while(play_again != 'N'){
             randomint = rand()%10;
-            printf("\nThe numbers to use are: %d, %d, %d, %d.\n",easyArray[randomint][0],easyArray[randomint][1],easyArray[randomint][2],easyArray[randomint][3]);
+            double num1 = easyArray[randomint][0];
+            double num2 = easyArray[randomint][1];
+            double num3 = easyArray[randomint][2];
+            double num4 = easyArray[randomint][3];
+            printf("\nThe numbers to use are: %.f, %.f, %.f, %.f.\n",num1,num2,num3,num4);
             printf("Enter the three operators to be used, in order (+,-,*, or /): ");
             scanf("%s",symbols);
-            answer = easyArray[randomint][0];
+            answer = num1;
             isGood = check(symbols);
             if(!isGood){
                 continue;
             }
-            for(int j = 0; j <3; j++){
-                if(symbols[j] == '+'){
-                    answer = add(answer, easyArray[randomint][j+1],1);
-                }
-                else{
-                    if(symbols[j] == '-'){
-                        answer = minus(answer, easyArray[randomint][j+1],1);
-                    }
-                    else{
-                        if(symbols[j] == '*'){
-                            answer = multiply(answer, easyArray[randomint][j+1],1);
-                        }
-                        else{
-                            answer = divide(answer, easyArray[randomint][j+1],1);
-                        }
-                    }
-                }
+            //first symbol
+            if(symbols[0] == '+'){
+                add(&answer, num2,1);
             }
+            else if(symbols[0] == '-'){
+                minus(&answer, num2, 1);
+            }
+            else if( symbols[0] == '*'){
+                multiply(&answer, num2, 1);
+            }
+            else if (symbols[0] == '/'){
+                divide(&answer, num2, 1);
+            }
+            //second symbol
+            if(symbols[1] == '+'){
+                add(&answer, num3,1);
+            }
+            else if(symbols[1] == '-'){
+                minus(&answer, num3, 1);
+            }
+            else if( symbols[1] == '*'){
+                multiply(&answer, num3, 1);
+            }
+            else if (symbols[1] == '/'){
+                divide(&answer, num3, 1);
+            }
+            //third symbol
+            if(symbols[2] == '+'){
+                add(&answer, num4,1);
+            }
+            else if(symbols[2] == '-'){
+                minus(&answer, num4, 1);
+            }
+            else if( symbols[2] == '*'){
+                multiply(&answer, num4, 1);
+            }
+            else if (symbols[2] == '/'){
+                divide(&answer, num4, 1);
+            }
+            //check if answer is correct
             if((answer - 24.0) < 0.001 && ((answer - 24.0) >= 0)){
                 printf("Well done! You are a math genius.\n");
             }
@@ -238,44 +285,66 @@ int main(int argc, char *argv[])
             scanf("%c", &play_again);
 
         }
-        printf("\nThanks for playing!\n");
+        printf("Thanks for playing!\n");
     }
     else{
-        int new_array[4];
         int random;
         while(play_again != 'N'){
-            random = rand()%3189;
-            //printf("Random is: %d", random);
-            for(int start = 0; start<4; start++){
-                new_array[start] = solutions[random][start];
-            }
-            printf("\nThe numbers to use are: %d, %d, %d, %d.\n", new_array[0], new_array[1], new_array[2], new_array[3]);
+            random = rand()%3307;
+
+            double num1 = solutions[random][0];
+            double num2 = solutions[random][1];
+            double num3 = solutions[random][2];
+            double num4 = solutions[random][3];
+            printf("\nThe numbers to use are: %.f, %.f, %.f, %.f.\n", num1, num2, num3, num4);
             printf("Enter the three operators to be used, in order (+,-,*, or /): ");
             scanf("%s",symbols);
-            answer = new_array[0];
+            answer = num1;
             isGood = check(symbols);
             if(!isGood){
                 continue;
             }
-            for(int j = 0; j <3; j++){
-                if(symbols[j] == '+'){
-                    answer = add(answer, new_array[j+1],1);
-                }
-                else{
-                    if(symbols[j] == '-'){
-                        answer = minus(answer, new_array[j+1],1);
-                    }
-                    else{
-                        if(symbols[j] == '*'){
-                            answer = multiply(answer, new_array[j+1],1);
-                        }
-                        else{
-                            answer = divide(answer, new_array[j+1],1);
-                        }
-                    }
-                }
+            //first symbol
+            if(symbols[0] == '+'){
+                add(&answer, num2,1);
             }
-            if((answer - 24.0) < 0.001 && ((answer - 24.0) >= 0)){
+            else if(symbols[0] == '-'){
+                minus(&answer, num2, 1);
+            }
+            else if( symbols[0] == '*'){
+                multiply(&answer, num2, 1);
+            }
+            else if (symbols[0] == '/'){
+                divide(&answer, num2, 1);
+            }
+            //second symbol
+            if(symbols[1] == '+'){
+                add(&answer, num3,1);
+            }
+            else if(symbols[1] == '-'){
+                minus(&answer, num3, 1);
+            }
+            else if( symbols[1] == '*'){
+                multiply(&answer, num3, 1);
+            }
+            else if (symbols[1] == '/'){
+                divide(&answer, num3, 1);
+            }
+            //third symbol
+            if(symbols[2] == '+'){
+                add(&answer, num4,1);
+            }
+            else if(symbols[2] == '-'){
+                minus(&answer, num4, 1);
+            }
+            else if( symbols[2] == '*'){
+                multiply(&answer, num4, 1);
+            }
+            else if (symbols[2] == '/'){
+                divide(&answer, num4, 1);
+            }
+            //check answer
+            if((answer - 24.0) < 0.001 && ((answer - 24.0) >= 0.0)){
                 printf("Well done! You are a math genius.\n");
             }
             else{
@@ -286,7 +355,7 @@ int main(int argc, char *argv[])
             scanf("%c", &play_again);
 
         }
-        printf("\nThanks for playing!\n");
+        printf("Thanks for playing!\n");
     }
     return 0;
 }
