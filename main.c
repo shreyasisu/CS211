@@ -218,6 +218,7 @@ int main(int argc, char *argv[]) {
     //debugger code first if needed
     if (debugger) {
         int c = 1;
+        printf("\n");
         for (int t = 0; t < 3187; t++) {
             printf("%d. %d%c%d%c%d%c%d\n", c, solutions[t][0], debug_solutions[t][0], solutions[t][1],
                    debug_solutions[t][1], solutions[t][2], debug_solutions[t][2], solutions[t][3]);//prints all solutions -1
