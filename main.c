@@ -285,7 +285,7 @@ int main(int argc, char *argv[]) {
             scanf("%c", &play_again);
 
         }
-        printf("Thanks for playing!\n");
+        printf("\nThanks for playing!\n");
     }
     else{
         int random;
@@ -355,7 +355,7 @@ int main(int argc, char *argv[]) {
             scanf("%c", &play_again);
 
         }
-        printf("Thanks for playing!\n");
+        printf("\nThanks for playing!\n");
     }
     return 0;
 }
