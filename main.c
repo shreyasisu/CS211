@@ -56,21 +56,6 @@ void divide_easy(double *x, double y, int isPrint){
         printf("%.f / %.f = %.f.\n", temp, y, *x);
     }
 }
-
-double symbol_loop(const char *symbols, double *answer, double num2) {
-    for(int op = 0; op < 3; op++) {
-        if (symbols[op] == '+') {
-            add(answer, num2, 1);
-        } else if (symbols[op] == '-') {
-            minus(answer, num2, 1);
-        } else if (symbols[op] == '*') {
-            multiply(answer, num2, 1);
-        } else if (symbols[op] == '/') {
-            divide_easy(answer, num2, 1);
-        }
-    }
-    return (*answer);
-}
 //this function checks if user input is valid to continue
 bool check(char x[]){
     bool isGood;//boolean for if the input is valid, then we can continue
@@ -96,9 +81,6 @@ char operators[] = {'+', '-', '*', '/'};
 
 int solutions[3188][4];
 char debug_solutions[3188][3];
-
-double symbol_loop(const char *symbols, double *answer, double num2);
-
 //this value will find all possible solutions for the game 24 and store it in two lists, one for the numbers, one for the operators
 void solve(){
     double answer = 0.0;
@@ -269,8 +251,18 @@ int main(int argc, char *argv[]) {
             if(!isGood){
                 continue;
             }
-            //first symbol
-            answer = symbol_loop(symbols, &answer, num2);
+            //loop through symbols and apply the operation to answer and the respective array value
+            for(int op = 0; op <3; op++) {
+                if (symbols[op] == '+') {
+                    add(&answer, easyArray[randomint][op +1], 1);
+                } else if (symbols[op] == '-') {
+                    minus(&answer, easyArray[randomint][op +1], 1);
+                } else if (symbols[op] == '*') {
+                    multiply(&answer, easyArray[randomint][op +1], 1);
+                } else if (symbols[op] == '/') {
+                    divide_easy(&answer, easyArray[randomint][op +1], 1);
+                }
+            }
             //check if answer is correct
             if((answer - 24.0) < 0.001 && ((answer - 24.0) >= 0)){
                 printf("Well done! You are a math genius.\n");
@@ -302,8 +294,18 @@ int main(int argc, char *argv[]) {
             if(!isGood){
                 continue;
             }
-            //first symbol
-            answer = symbol_loop(symbols, &answer, num2);
+            //loop through symbols and apply the operation to answer and the respective solutions value
+            for(int op = 0; op<3;op++) {
+                if (symbols[op] == '+') {
+                    add(&answer, solutions[random][op+1], 1);
+                } else if (symbols[op] == '-') {
+                    minus(&answer, solutions[random][op+1], 1);
+                } else if (symbols[op] == '*') {
+                    multiply(&answer, solutions[random][op+1], 1);
+                } else if (symbols[op] == '/') {
+                    divide_easy(&answer, solutions[random][op+1], 1);
+                }
+            }
 
             //check answer
             if((answer - 24.0) < 0.001 && ((answer - 24.0) >= 0.0)){
@@ -321,4 +323,3 @@ int main(int argc, char *argv[]) {
     }
     return 0;
 }
-
