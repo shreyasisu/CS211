@@ -232,7 +232,7 @@ int main(int argc, char *argv[]) {
     }
     //start of game code
     int randomint;
-    char symbols[6];
+    char symbols[20];
     double answer;
     bool isGood;
     if(easymode){
