@@ -167,7 +167,7 @@ void solve(){
 }
 
 int main(int argc, char *argv[]) {
-     (1);//used to have same input as test cases
+    srand(1);//used to have same input as test cases
     char current_str[4];
     solve();//call solve function
     bool easymode = true;
