@@ -167,7 +167,7 @@ void solve(){
 }
 
 int main(int argc, char *argv[]) {
-    srand(1);//used to have same input as test cases
+     (1);//used to have same input as test cases
     char current_str[4];
     solve();//call solve function
     bool easymode = true;
@@ -229,7 +229,7 @@ int main(int argc, char *argv[]) {
     }
     //start of game code
     int randomint;
-    char symbols[3];
+    char symbols[6];
     double answer;
     bool isGood;
     if(easymode){
