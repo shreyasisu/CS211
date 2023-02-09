@@ -303,7 +303,7 @@ int main(int argc, char *argv[]) {
     else{
         int random;
         while(play_again != 'N'){
-            random = rand()%3307;//different rand range
+            random = rand()%3188;//different rand range
 
             double num1 = solutions[random][0];
             double num2 = solutions[random][1];
